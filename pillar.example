@@ -1,0 +1,7 @@
+mail_alert:
+  account:
+    email: some@example.com
+    password: p@ssw0rd;)
+  users:
+    - first@example.com
+    - second@example.com
