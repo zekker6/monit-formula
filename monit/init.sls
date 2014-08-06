@@ -6,7 +6,7 @@ monit_pkgs:
 /etc/init/monit.conf:
   file:
     - managed
-    - source: salt://sfym/files/monit/etc/init/monit.conf
+    - source: salt://monit/files/monit/etc/init/monit.conf
     - user: root
     - group: root
     - mode: 0444
@@ -20,7 +20,7 @@ monit_pkgs:
 /etc/monit/conf.d/main:
   file:
     - managed
-    - source: salt://sfym/files/monit/etc/monit/conf.d/main
+    - source: salt://monit/files/monit/etc/monit/conf.d/main
     - user: root
     - group: root
     - mode: 0444
@@ -28,7 +28,7 @@ monit_pkgs:
 /etc/monit/conf.d/mail:
   file:
     - managed
-    - source: salt://sfym/files/monit/etc/monit/conf.d/mail
+    - source: salt://monit/files/monit/etc/monit/conf.d/mail
     - user: root
     - group: root
     - mode: 0444
