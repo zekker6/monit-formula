@@ -1,5 +1,7 @@
 mail_alert:
   account:
+    server: smtp.gmail.com
+    port: 587
     email: some@example.com
     password: p@ssw0rd;)
   users:

@@ -4,7 +4,7 @@ set alert {{email}}
 
 set mail-format { from: {{pillar['mail_alert']['account']['email']}} }
 
-set mailserver smtp.gmail.com port 587
+set mailserver {{pillar['mail_alert']['account']['server']}} port {{pillar['mail_alert']['account']['port']}}
     username "{{pillar['mail_alert']['account']['email']}}" password "{{pillar['mail_alert']['account']['password']}}"
     using tlsv1
     with timeout 30 seconds
