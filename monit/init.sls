@@ -25,6 +25,7 @@ monit_pkgs:
     - group: root
     - mode: 0444
 
+{% if pillar['mail_alert'] is defined %}
 /etc/monit/conf.d/mail:
   file:
     - managed
@@ -33,6 +34,7 @@ monit_pkgs:
     - group: root
     - mode: 0444
     - template: jinja
+{% endif %}
 
 monit:
   service:
@@ -43,6 +45,6 @@ monit:
       - pkg: monit
       - file: /etc/init/monit.conf
       - file: /etc/monit/conf.d/main
-      - file: /etc/monit/conf.d/mail
+      {% if pillar['mail_alert'] is defined %}- file: /etc/monit/conf.d/mail{% endif %}
     - watch:
       - file: /etc/monit/conf.d/*
