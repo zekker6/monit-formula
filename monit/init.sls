@@ -1,3 +1,4 @@
+{% if pillar['monit'] is defined && pillar['monit'] %}
 monit_pkgs:
   pkg.installed:
     - names:
@@ -48,3 +49,4 @@ monit:
       {% if pillar['mail_alert'] is defined %}- file: /etc/monit/conf.d/mail{% endif %}
     - watch:
       - file: /etc/monit/conf.d/*
+{% endif %}

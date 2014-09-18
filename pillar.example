@@ -1,3 +1,5 @@
+monit: True
+
 mail_alert:
   account:
     server: smtp.gmail.com
