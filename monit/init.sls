@@ -1,4 +1,4 @@
-{% if pillar['monit'] is defined && pillar['monit'] %}
+{% if pillar['monit'] is defined and pillar['monit'] %}
 monit_pkgs:
   pkg.installed:
     - names:
