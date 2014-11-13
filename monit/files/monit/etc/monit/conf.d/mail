@@ -1,4 +1,4 @@
-{% for email in pillar['mail_alert']['users'] %}
+{%- for email in pillar['mail_alert']['users'] -%}
 set alert {{email}}
 {% endfor %}
 
@@ -6,9 +6,9 @@ set alert {{email}}
 set mail-format { from: {{pillar['mail_alert']['account']['email']}} }
 {%- endif -%}
 
-set mailserver {{pillar['mail_alert']['account']['server']}} port {{pillar['mail_alert']['account']['port']}}
-    {%- if salt['pillar.get']('mail_alert:account:email') and salt['pillar.get']('mail_alert:account:password') -%}
+set mailserver {{pillar['mail_alert']['account']['server']}} port "{{pillar['mail_alert']['account']['port']}} " 
+    {%- if salt['pillar.get']('mail_alert:account:email') and salt['pillar.get']('mail_alert:account:password') %}
     username "{{pillar['mail_alert']['account']['email']}}" password "{{pillar['mail_alert']['account']['password']}}"
     using tlsv1
-    {%- endif -%}
+    {%- endif %}
     with timeout 30 seconds
