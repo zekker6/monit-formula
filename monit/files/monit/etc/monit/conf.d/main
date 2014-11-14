@@ -1,6 +1,0 @@
-set daemon  10
-
-# Enable http access from localhost
-set httpd port 2812 and
-  use address 0.0.0.0
-  allow 23.92.16.192

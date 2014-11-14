@@ -1,13 +1,10 @@
-{% if pillar['monit'] is defined and pillar['monit'] %}
-monit_pkgs:
+monit_pkg:
   pkg.installed:
-    - names:
-      - monit
+    - name: monit
 
 /etc/init/monit.conf:
-  file:
-    - managed
-    - source: salt://monit/files/monit/etc/init/monit.conf
+  file.managed:
+    - source: salt://monit/files/monit.conf
     - user: root
     - group: root
     - mode: 0444
@@ -19,18 +16,17 @@ monit_pkgs:
     - mode: 0755
 
 /etc/monit/conf.d/main:
-  file:
-    - managed
-    - source: salt://monit/files/monit/etc/monit/conf.d/main
+  file.managed:
+    - source: salt://monit/files/main
     - user: root
     - group: root
     - mode: 0444
+    - template: jinja
 
-{% if pillar['mail_alert'] is defined %}
+{% if pillar['monit']['mail_alert'] is defined %}
 /etc/monit/conf.d/mail:
-  file:
-    - managed
-    - source: salt://monit/files/monit/etc/monit/conf.d/mail
+  file.managed:
+    - source: salt://monit/files/mail
     - user: root
     - group: root
     - mode: 0444
@@ -38,15 +34,13 @@ monit_pkgs:
 {% endif %}
 
 monit:
-  service:
-    - running
+  service.running:
     - enable: True
     - restart: True
     - require:
       - pkg: monit
       - file: /etc/init/monit.conf
       - file: /etc/monit/conf.d/main
-      {% if pillar['mail_alert'] is defined %}- file: /etc/monit/conf.d/mail{% endif %}
+      {% if pillar['monit']['mail_alert'] is defined %}- file: /etc/monit/conf.d/mail{% endif %}
     - watch:
       - file: /etc/monit/conf.d/*
-{% endif %}

@@ -1,0 +1,8 @@
+set daemon  10
+
+# Enable http access from localhost
+set httpd port {{ salt['pillar.get']('monit:http_access:port') }} and
+  use address {{ salt['pillar.get']('monit:http_access:bind') }}
+  allow {{ salt['pillar.get']('monit:http_access:bind') }}
+  allow {{ salt['pillar.get']('monit:http_access:user') }}:{{ salt['pillar.get']('monit:http_access:password') }}
+
