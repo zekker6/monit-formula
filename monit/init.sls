@@ -1,9 +1,5 @@
 {% from "monit/map.jinja" import monit with context %}
 
-echo_context:
-  cmd.run: 
-    - name: echo {{ monit.port }}
-
 monit_pkg:
   pkg.installed:
     - name: monit
@@ -28,6 +24,8 @@ monit_pkg:
     - group: root
     - mode: 0444
     - template: jinja
+    - context: 
+      port: {{ monit.port }}
 
 {% if pillar['monit']['mail_alert'] is defined %}
 /etc/monit/conf.d/mail:

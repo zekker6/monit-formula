@@ -1,6 +1,6 @@
 set daemon  10
 
-set httpd port {{ salt['pillar.get']('monit:http_access:port') }} and
+set httpd port {{ port }} and
   use address {{ salt['pillar.get']('monit:http_access:bind') }}
   allow {{ salt['pillar.get']('monit:http_access:allow') }}
   allow {{ salt['pillar.get']('monit:http_access:user') }}:{{ salt['pillar.get']('monit:http_access:password') }}
