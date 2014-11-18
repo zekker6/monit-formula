@@ -1,8 +1,8 @@
 {% set monit = salt['grains.filter_by']({
     'default': {
-        'port': 2812,
+        'port': salt['pillar.get']('monit:http_access:port'),
     },
     'ddll.co': {
-        'port': 2813,
+        'port': salt['pillar.get']('monit:http_access:port_alt'),
     },
-}, merge=salt['pillar.get']('munin_node:http_access'), grain='id', default='default') %}
+}, merge=salt['pillar.get']('monit:lookup'), grain='id', default='default') %}

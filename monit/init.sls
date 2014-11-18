@@ -1,3 +1,9 @@
+{% from "monit/map.jinja" import monit with context %}
+
+echo_context:
+  cmd.run: 
+    - name: echo {{ monit.port }}
+
 monit_pkg:
   pkg.installed:
     - name: monit
