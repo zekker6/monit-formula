@@ -1,5 +1,5 @@
 {%- for email in pillar['monit']['mail_alert']['users'] -%}
-set alert {{email}} ON { invalid, nonexist, timeout, resource, size, timestamp }
+set alert {{email}} ON { invalid, timeout, resource, size, timestamp }
 {% endfor %}
 
 {%- if salt['pillar.get']('monit:mail_alert:account:email') and salt['pillar.get']('monit:mail_alert:account:password') -%}
