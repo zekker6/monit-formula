@@ -2,7 +2,7 @@
     'default': {
         'port': salt['pillar.get']('monit:http_access:port'),
     },
-    'lxc': {
+    'ddll.co': {
         'port': salt['pillar.get']('monit:http_access:port_alt'),
     },
-}, merge=salt['pillar.get']('monit:lookup'), grain='roles', default='default') %}
+}, merge=salt['pillar.get']('monit:lookup'), grain='id', default='default') %}
