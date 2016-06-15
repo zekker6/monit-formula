@@ -1,0 +1,26 @@
+language: python
+python:
+- '2.7'
+
+before_install:
+  - sudo apt-get update
+  - curl -L http://bootstrap.saltstack.org | sudo sh -s
+
+install:
+  # Copy these states
+  - sudo mkdir -p /srv/{salt,pillar}
+  - sudo cp -r . /srv/salt
+  - echo /srv/{salt,pillar} | sudo xargs -n 1 cp .travis/top.sls
+  - sudo cp pillar.example /srv/pillar/monit.sls
+  - sudo cp {.travis,/etc/salt}/minion
+  - sudo service salt-minion restart
+
+  # Additional debug help
+  - sudo cat /var/log/salt/*
+
+  # See what kind of travis box you're on
+  # to help with making your states compatible with travis
+  - sudo salt-call grains.items --local
+
+script:
+  - sudo salt-call state.highstate --local --retcode-passthrough

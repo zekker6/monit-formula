@@ -1,14 +1,16 @@
-{%- for email in pillar['monit']['mail_alert']['users'] -%}
+{%- for email in mail_alert.users -%}
 set alert {{email}} ON { invalid, timeout, resource, size, timestamp }
 {% endfor %}
 
-{%- if salt['pillar.get']('monit:mail_alert:account:email') and salt['pillar.get']('monit:mail_alert:account:password') -%}
-set mail-format { from: {{pillar['monit']['mail_alert']['account']['email']}} }
+{%- if mail_alert.account.email and mail_alert.account.password -%}
+set mail-format { from: {{mail_alert.account.email}} }
 {%- endif -%}
 
-set mailserver {{pillar['monit']['mail_alert']['account']['server']}} port {{pillar['monit']['mail_alert']['account']['port']}} 
-    {%- if salt['pillar.get']('monit:mail_alert:account:email') and salt['pillar.get']('monit:mail_alert:account:password') %}
-    username "{{pillar['monit']['mail_alert']['account']['email']}}" password "{{pillar['monit']['mail_alert']['account']['password']}}"
+{%- if mail_alert.account.server and mail_alert.account.port %}
+set mailserver {{mail_alert.account.server}} port {{mail_alert.account.port}} 
+    {%- if mail_alert.account.email and mail_alert.account.password %}
+    username "{{mail_alert.account.email}}" password "{{mail_alert.account.password}}"
     using tlsv1
     {%- endif %}
     with timeout 30 seconds
+{%- endif %}

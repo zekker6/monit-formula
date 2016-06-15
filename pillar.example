@@ -1,11 +1,22 @@
-monit: True
+monit: 
+  mail_alert:
+    account:
+      server: smtp.gmail.com
+      port: 587
+      email: some@example.com
+      password: p@ssw0rd;)
+    users:
+      - first@example.com
+      - second@example.com
 
-mail_alert:
-  account:
-    server: smtp.gmail.com
-    port: 587
-    email: some@example.com
-    password: p@ssw0rd;)
-  users:
-    - first@example.com
-    - second@example.com
+  http_access:
+    port: 2812
+    bind: 127.0.0.1
+    allowed:
+      users:
+        - ['user1', 'pass1']
+        - ['user2', 'pass2']
+      hosts:
+        - 127.0.0.1
+        - 192.168.0.10
+        - 192.168.0.11
