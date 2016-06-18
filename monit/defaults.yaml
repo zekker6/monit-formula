@@ -2,7 +2,8 @@
 # vim: ft=yaml
 monit:
   pkg: monit
-  config: '/etc/monit'
+  config: '/etc/monit/monitrc'
+  config_includes: '/etc/monit/conf.d'
   service:
     name: monit
   http_access: 

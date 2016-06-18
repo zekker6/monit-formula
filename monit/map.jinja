@@ -10,7 +10,12 @@ that differ from whats in defaults.yaml
 ##}
 {% set os_family_map = salt['grains.filter_by']({
         'Debian': {},
-        'Suse': {},
+        'Kali': {},
+        'Gentoo': {
+            'pkg': 'app-admin/monit',
+            'config': '/etc/monitrc',
+            'config_includes': '/etc/monit.d'
+        },
         'RedHat': {},
   }
   , grain="os_family"

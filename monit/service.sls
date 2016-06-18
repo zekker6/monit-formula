@@ -8,4 +8,4 @@
     - enable: True
     - restart: True
     - watch:
-      - file: /etc/monit/conf.d/*
+      - file: {{ monit.config_includes }}/*
