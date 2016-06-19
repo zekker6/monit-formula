@@ -10,7 +10,8 @@ install:
   # Copy these states
   - sudo mkdir -p /srv/{salt,pillar}
   - sudo cp -r . /srv/salt
-  - echo /srv/{salt,pillar} | sudo xargs -n 1 cp .travis/top.sls
+  - sudo cp .travis/top.sls /srv/salt/top.sls
+  - sudo cp .travis/top_pillar.sls /srv/pillar/top.sls
   - sudo cp pillar.example /srv/pillar/monit.sls
   - sudo cp {.travis,/etc/salt}/minion
   - sudo service salt-minion restart

@@ -1,3 +1,5 @@
 base:
   '*':
-    - monit
+    - monit.install
+    - monit.config-ng
+    - monit.service

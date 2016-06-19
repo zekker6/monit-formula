@@ -4,4 +4,5 @@
 include:
   - monit.install
   - monit.config
+  - monit.config-ng
   - monit.service
