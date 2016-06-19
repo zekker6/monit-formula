@@ -9,50 +9,6 @@ This formula is made from `trexglobal/monit-formula`_ following `saltstack-formu
 .. _trexglobal/monit-formula: https://github.com/trexglobal/monit-formula
 .. _saltstack-formulas/template-formula: https://github.com/saltstack-formulas/template-formula
 
-To setup Monit
-==============
-
-.. contents::
-    :local:
-
-``Install monit``
------------------
-
-Add remotes to /etc/salt/master or /etc/salt/minion if running standalone.
-
-.. code:: yaml
-
-  gitfs_remotes:
-    - git://github.com/alinefr/monit-formula
-
-``Setup monit``
----------------
-
-Setup pillar_ from pillar.example.
-
-.. _pillar: http://docs.saltstack.com/en/latest/topics/pillar/
-
-
-Add monit to your server `state file`_
-
-.. _state file: http://docs.saltstack.com/en/latest/topics/tutorials/starting_states.html
-
-.. code:: yaml
-
-    include:
-      - monit
-
-or to the top.sls_ file.
-
-.. _top.sls: http://docs.saltstack.com/en/latest/ref/states/top.html
-
-.. code:: yaml
-
-    base:
-      'some.server.example.com':
-        - monit
-
-
 Available states
 ================
 
@@ -72,12 +28,7 @@ Installs monit.
 ``monit.config``
 ----------------
 
-Add initial monit configuration.
-
-``monit.config-ng``
--------------------
-
-Experimental by service configuration. 
+Add initial monit configuration and also supports by service configuration. 
 
 Example:
 
@@ -106,6 +57,9 @@ It generates the following config:
       stop program = "/etc/init.d/nginx stop"
       if failed host 127.0.0.1 port 80 protocol http then restart
 
+Check `pillar.example`_ for full usage.
+
+.. _pillar.example: pillar.example
   
 ``monit.service``
 -----------------

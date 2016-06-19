@@ -6,6 +6,7 @@
     - template: jinja
     - makedirs: True
     - context:
+        config_includes: {{ monit.config_includes }}
         http_access: {{ monit.http_access }}
 
 {% if monit.mail_alert is defined %}
@@ -17,3 +18,10 @@
     - context:
       mail_alert: {{ monit.mail_alert }}
 {% endif %}
+
+{{ monit.config_includes }}/modules:
+  file.managed:
+    - source: salt://monit/files/modules
+    - template: jinja
+    - context:
+      modules: {{ monit.modules }}
