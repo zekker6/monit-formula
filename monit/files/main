@@ -8,3 +8,5 @@ set httpd port {{ http_access.port }} and
 {%- for userdata in http_access.allowed.users %}
   allow {{ userdata[0] }}:{{ userdata[1] }}
 {%- endfor %}
+
+include {{ config_includes }}/*

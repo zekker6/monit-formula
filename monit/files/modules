@@ -12,7 +12,7 @@ check {{ mod_name }} {{ name }} with {{ element }} {{ element_v }}
         {%- endif %}
         {%- if 'config' in kind %}
           {%- if 'start' in element or 'stop' in element %}
-  {{ element }} program = {{ element_v }} 
+  {{ element }} program = "{{ element_v }}"
           {%- endif %}
         {%- endif %}
         {%- if 'if_failed' in kind %}

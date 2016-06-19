@@ -31,9 +31,7 @@ monit:
           start: "/etc/init.d/nginx start"
           stop: "/etc/init.d/nginx stop"
         if_failed: 
-          host: 127.0.0.1
-          port: 80
-          protocol: http
+          host: 127.0.0.1 port 80 protocol http
           action: restart
 
     postfix:
@@ -45,6 +43,5 @@ monit:
           start: "/etc/init.d/postfix start"
           stop: "/etc/init.d/postfix stop"
         if_failed:
-          port: 25
-          protocol: smtp
+          port: 25 protocol smtp
           action: restart
