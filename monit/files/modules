@@ -13,6 +13,8 @@ check {{ mod_name }} {{ name }} with {{ element }} {{ element_v }}
         {%- if 'config' in kind %}
           {%- if 'start' in element or 'stop' in element %}
   {{ element }} program = "{{ element_v }}"
+          {%- else %}
+  {{ element }} {{ element_v }}
           {%- endif %}
         {%- endif %}
         {%- if 'if_failed' in kind %}

@@ -101,6 +101,7 @@ It generates the following config:
 .. code::
 
     check process nginx with pidfile /var/run/nginx.pid
+      group www
       start program = "/etc/init.d/nginx start"
       stop program = "/etc/init.d/nginx stop"
       if failed host 127.0.0.1 port 80 protocol http then restart
