@@ -1,22 +1,23 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 $script = <<SCRIPT
-mkdir /srv/pillar
+test -d /srv/pillar || mkdir /srv/pillar
 test -f /tmp/travis/top.sls && cp /{tmp/travis,srv/salt}/top.sls
-cp /{tmp/travis,srv/pillar}/top.sls 
+cp {/tmp/travis,/srv/salt}/top.sls
+cp /tmp/travis/top_pillar.sls /srv/pillar/top.sls
 cp /srv/{salt/pillar.example,pillar/monit.sls}
 SCRIPT
 
 Vagrant.configure(2) do |config|
-  config.vm.define "local" do |local|
-    local.vm.box = "stingA0815/archlinux-rex"
+  config.vm.define "xenial" do |xenial|
+    xenial.vm.box = "xenial"
     
-    local.vm.synced_folder ".", "/vagrant", disabled: true
-    local.vm.synced_folder ".", "/srv/salt"
-    local.vm.synced_folder ".travis", "/tmp/travis"
+    xenial.vm.synced_folder ".", "/vagrant", disabled: true
+    xenial.vm.synced_folder ".", "/srv/salt"
+    xenial.vm.synced_folder ".travis", "/tmp/travis"
 
-    local.vm.provision "shell", inline: $script
-    local.vm.provision :salt do |salt|
+    xenial.vm.provision "shell", inline: $script
+    xenial.vm.provision :salt do |salt|
       salt.bootstrap_script = "../salt-bootstrap/bootstrap-salt.sh"
       salt.masterless = true
       salt.minion_config = ".travis/minion"

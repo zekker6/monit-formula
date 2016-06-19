@@ -22,8 +22,10 @@ monit:
         - 192.168.0.11
 
   modules:
-    nginx:
+    nginx_init:
       process: 
+        custom:
+          name: nginx
         with:
           pidfile: /var/run/nginx.pid
         config:

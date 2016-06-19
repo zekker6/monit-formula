@@ -57,6 +57,28 @@ It generates the following config:
       stop program = "/etc/init.d/nginx stop"
       if failed host 127.0.0.1 port 80 protocol http then restart
 
+Sometimes you may need more than one configuration block for the 
+same name. If so you can add a custom name.
+
+.. code:: yaml
+
+    modules:
+      nginx_init:
+        process: 
+          custom:
+            name: nginx
+          with:
+            pidfile: /var/run/nginx.pid
+          config:
+            group: www
+            start: "/etc/init.d/nginx start"
+            stop: "/etc/init.d/nginx stop"
+          if_failed: 
+            host: 127.0.0.1 port 80 protocol http
+            action: restart
+
+The result is exacly the same as the configuration shown before.
+
 Check `pillar.example`_ for full usage.
 
 .. _pillar.example: pillar.example

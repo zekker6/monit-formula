@@ -1,10 +1,10 @@
 {%- for module, module_v in modules.iteritems() %}
-  {%- if module_v.name is defined %}
-    {%- set name = module_v.name %}
-  {%- else %}
-    {%- set name = module %}
-  {%- endif %}
   {%- for mod_name, mod_name_v in module_v.iteritems() %}
+    {%- if mod_name_v.has_key('custom') %}
+      {%- set name = mod_name_v.custom.name %}
+    {% else %}
+      {%- set name = module %}
+    {%- endif %}
     {%- for kind, kind_v in mod_name_v.iteritems() %}
       {%- for element, element_v in kind_v.iteritems() %}
         {%- if 'pidfile' in kind_v %}
