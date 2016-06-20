@@ -8,4 +8,6 @@
     - enable: True
     - restart: True
     - watch:
-      - file: {{ monit.config_includes }}/*
+      - file: {{ monit.config }}
+      - file: {{ monit.config_includes }}/mail
+      - file: {{ monit.config_includes }}/modules
