@@ -43,8 +43,8 @@ Example:
             group: www
             start: "/etc/init.d/nginx start"
             stop: "/etc/init.d/nginx stop"
-          if_failed: 
-            host: 127.0.0.1 port 80 protocol http
+          if: 
+            failed: host 127.0.0.1 port 80 protocol http
             action: restart
 
 It generates the following config:
@@ -73,8 +73,8 @@ same name. If so you can add a custom name.
             group: www
             start: "/etc/init.d/nginx start"
             stop: "/etc/init.d/nginx stop"
-          if_failed: 
-            host: 127.0.0.1 port 80 protocol http
+          if: 
+            failed: host 127.0.0.1 port 80 protocol http
             action: restart
 
 The result is exacly the same as the configuration shown before.

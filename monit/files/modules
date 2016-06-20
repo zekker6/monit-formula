@@ -16,8 +16,8 @@
             group: www
             start: "/etc/init.d/nginx start"
             stop: "/etc/init.d/nginx stop"
-          if_failed: 
-            host: 127.0.0.1 port 80 protocol http
+          if: 
+            failed: 127.0.0.1 port 80 protocol http
             action: restart
 -#}
 {#- module = nginx_init, 
@@ -36,7 +36,7 @@
       {%- set name = module %}
     {%- endif -%}
 
-    {#- kind = with, config and if_failed
+    {#- kind = with, config and if
         kind_v = {'pidfile':'/var/run/pid'}, {'group': 'www', etc. #}
     {%- for kind, kind_v in mod_name_v.iteritems() -%}
 
@@ -44,8 +44,8 @@
         element_v = /var/run/nginx.pid, www, "/etc/init.d/nginx start", etc. #}
       {%- for element, element_v in kind_v.iteritems() -%}
     
-        {#- if it has 'pidfile' then this is the 'check' line #}
-        {%- if 'pidfile' in kind_v %}
+        {#- if it has 'pidfile' or 'path' then this is the 'check' line #}
+        {%- if 'pidfile' in kind_v or 'path' in kind_v %}
 check {{ mod_name }} {{ name }} with {{ element }} {{ element_v }}
         {%- endif -%}
 
@@ -60,12 +60,12 @@ check {{ mod_name }} {{ name }} with {{ element }} {{ element_v }}
           {%- endif %}
         {%- endif -%}
 
-        {#- if_failed filter 'if failed' line #}
-        {%- if 'if_failed' in kind -%}
+        {#- if filter 'if' line #}
+        {%- if 'if' in kind -%}
 
           {#- 'action' is appended to the 'if failed' line #}
           {%- if 'action' not in element %}
-  if failed {{ element }} {{ element_v }} then {{ kind_v.action }}
+  if {{ element }} {{ element_v }} then {{ kind_v.action }}
           {%- endif %}
         {%- endif %}
       {%- endfor %}

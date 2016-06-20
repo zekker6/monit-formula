@@ -32,8 +32,8 @@ monit:
           group: www
           start: "/etc/init.d/nginx start"
           stop: "/etc/init.d/nginx stop"
-        if_failed: 
-          host: 127.0.0.1 port 80 protocol http
+        if: 
+          failed: host 127.0.0.1 port 80 protocol http
           action: restart
 
     postfix:
@@ -44,6 +44,42 @@ monit:
           group: mail
           start: "/etc/init.d/postfix start"
           stop: "/etc/init.d/postfix stop"
-        if_failed:
-          port: 25 protocol smtp
+        if:
+          failed: port 25 protocol smtp
           action: restart
+
+    cron:
+      process:
+        with:
+          pidfile: /var/run/cron.pid
+        config:
+          group: system
+          start: "/etc/init.d/cron start"
+          stop: "/etc/init.d/cron stop"
+          depends: on cron_rc
+
+      file:
+        custom:
+          name: cron_rc
+        with: 
+          path: /etc/init.d/cron
+        if:
+          failed: checksum
+          action: unmonitor
+        if2:
+          failed: permission 755
+          action: unmonitor
+        if3:
+          failed: uid root
+          action: unmonitor
+        if4:
+          failed: gid root
+          action: unmonitor
+
+    gdm:
+      process:
+        with:
+          pidfile: /var/run/gdm.pid
+        config:
+          start: "/etc/init.d/gdm start"
+          stop: "/etc/init.d/gdm stop"
