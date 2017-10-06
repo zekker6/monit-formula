@@ -6,6 +6,7 @@
     - source: salt://monit/files/monitrc
     - template: jinja
     - makedirs: True
+    - mode: '0700'
     - context:
         config_includes: {{ monit.config_includes }}
         http_access: {{ monit.http_access }}
