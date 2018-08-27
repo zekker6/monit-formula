@@ -8,7 +8,7 @@ set mail-format { from: {{mail_alert.get('send_as', mail_alert.account.email)}} 
 
 {%- if mail_alert.account.server and mail_alert.account.port %}
 set mailserver {{mail_alert.account.server}} port {{mail_alert.account.port}} 
-    {%- if mail_alert.account.email and 'password' in mail_alert.account and mail_alert.account.password %}
+    {%- if mail_alert.account.email is defined and mail_alert.account.password is defined %}
     username "{{mail_alert.account.email}}" password "{{mail_alert.account.password}}"
     using tlsv1
     {%- endif %}
