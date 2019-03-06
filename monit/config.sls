@@ -8,8 +8,8 @@
     - makedirs: True
     - mode: '0700'
     - context:
-        config_includes: {{ monit.config_includes }}
-        http_access: {{ monit.http_access }}
+        config_includes: {{ monit.config_includes | json }}
+        http_access: {{ monit.http_access | json }}
 
 {#- This is the mail alert configuration #}
 {% if monit.mail_alert is defined %}
