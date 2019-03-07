@@ -2,7 +2,7 @@
 set alert {{email}} ON { invalid, timeout, resource, size, timestamp }
 {% endfor %}
 
-{%- if mail_alert.account.email and mail_alert.account.password -%}
+{%- if mail_alert.account.email is defined and mail_alert.account.password is defined -%}
 set mail-format { from: {{mail_alert.get('send_as', mail_alert.account.email)}} }
 {%- endif -%}
 
