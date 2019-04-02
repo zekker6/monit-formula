@@ -8,7 +8,7 @@
     - makedirs: True
     - mode: '0700'
     - context:
-        config_includes: {{ monit.config_includes }}
+        config_includes: {{ monit.config_includes | json }}
         http_access: {{ monit.http_access | json }}
         daemon_check: {{ monit.daemon_check }}
 
