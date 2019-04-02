@@ -9,7 +9,7 @@
     - mode: '0700'
     - context:
         config_includes: {{ monit.config_includes }}
-        http_access: {{ monit.http_access | tojson }}
+        http_access: {{ monit.http_access | json }}
         daemon_check: {{ monit.daemon_check }}
 
 {#- This is the mail alert configuration #}
@@ -20,7 +20,7 @@
     - template: jinja
     - makedirs: True
     - context:
-      mail_alert: {{ monit.mail_alert | tojson }}
+      mail_alert: {{ monit.mail_alert | json }}
 {% endif %}
 
 {#- This is populated by modules configuration
@@ -30,4 +30,4 @@
     - source: salt://monit/files/modules
     - template: jinja
     - context:
-      modules: {{ monit.modules | tojson }}
+      modules: {{ monit.modules | json }}
