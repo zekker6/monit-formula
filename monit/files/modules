@@ -22,11 +22,11 @@
 -#}
 {#- module = nginx_init, 
     module_v = {'process': {'with': {'pidfile':... #}
-{%- for module, module_v in modules.iteritems() -%}
+{%- for module, module_v in modules.items() -%}
 
   {#- mod_name = process 
       mod_name_v = {'custom': {'name': 'nginx'}, 'with': {'pidfile':... #}
-  {%- for mod_name, mod_name_v in module_v.iteritems() -%}
+  {%- for mod_name, mod_name_v in module_v.items() -%}
 
     {#- if {'custom': {'name':... exist, this is our 'name'.
         otherwise 'name' is the value of 'module' #}
@@ -38,11 +38,11 @@
 
     {#- kind = with, config and if
         kind_v = {'pidfile':'/var/run/pid'}, {'group': 'www', etc. #}
-    {%- for kind, kind_v in mod_name_v.iteritems() -%}
+    {%- for kind, kind_v in mod_name_v.items() -%}
 
     {#- element = pidfile, group, start, stop, etc. 
         element_v = /var/run/nginx.pid, www, "/etc/init.d/nginx start", etc. #}
-      {%- for element, element_v in kind_v.iteritems() -%}
+      {%- for element, element_v in kind_v.items() -%}
     
         {#- if it has 'pidfile' or 'path' then this is the 'check' line #}
         {%- if 'pidfile' in kind_v or 'path' in kind_v %}
@@ -50,8 +50,8 @@ check {{ mod_name }} {{ name }} with {{ element }} {{ element_v }}
         {%- endif -%}
       {% endfor %}
     {% endfor %}
-    {%- for kind, kind_v in mod_name_v.iteritems() -%}
-      {%- for element, element_v in kind_v.iteritems() -%}
+    {%- for kind, kind_v in mod_name_v.items() -%}
+      {%- for element, element_v in kind_v.items() -%}
 
         {#- 'config' is the lines containing 'group', 'start program', etc #}
         {%- if 'config' in kind -%}
