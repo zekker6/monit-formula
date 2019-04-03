@@ -40,6 +40,8 @@
         kind_v = {'pidfile':'/var/run/pid'}, {'group': 'www', etc. #}
     {%- for kind, kind_v in mod_name_v.iteritems() -%}
 
+    {#- element = pidfile, group, start, stop, etc. 
+        element_v = /var/run/nginx.pid, www, "/etc/init.d/nginx start", etc. #}
       {%- for element, element_v in kind_v.iteritems() -%}
     
         {#- if it has 'pidfile' or 'path' then this is the 'check' line #}
