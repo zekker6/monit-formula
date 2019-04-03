@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+# vim: ft=jinja
 {%- for module, module_v in modules.iteritems() -%}
 
   {%- for mod_name, mod_name_v in module_v.iteritems() -%}
