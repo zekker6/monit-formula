@@ -1,4 +1,4 @@
-set daemon  10
+set daemon  {{ daemon_check }}
 
 set httpd port {{ http_access.port }} and
   use address {{ http_access.bind }}

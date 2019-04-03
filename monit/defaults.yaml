@@ -4,6 +4,7 @@ monit:
   pkg: monit
   config: '/etc/monit/monitrc'
   config_includes: '/etc/monit/conf.d'
+  daemon_check: 10
   service:
     name: monit
   http_access: 
