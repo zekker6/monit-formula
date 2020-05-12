@@ -30,7 +30,7 @@
 
     {#- if {'custom': {'name':... exist, this is our 'name'.
         otherwise 'name' is the value of 'module' #}
-    {%- if mod_name_v.has_key('custom') %}
+    {%- if 'custom' in mod_name_v %}
       {%- set name = mod_name_v.custom.name %}
     {% else %}
       {%- set name = module %}
