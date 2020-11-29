@@ -29,5 +29,6 @@
   file.managed:
     - source: salt://monit/files/modules
     - template: jinja
+    - makedirs: True
     - context:
       modules: {{ monit.modules | json }}
